@@ -1,11 +1,27 @@
-<h1>All restaurants</h1>
+<h1>My Yelp Clone</h1>
 
-<div id="restaurants">
-  <ul>
-  <% @restaurants.each do |restaurant| %>
-  <li>
-    <%= render 'restaurant', restaurant: restaurant %>
-  </li>
-  <% end %>
-</ul>
+<div class="restaurants-list">
+    <div id="create-restaurant">
+      <%= link_to new_restaurant_path do %>
+      <i class="fa-solid fa-plus" style="color: #969aa2;"></i>
+      Add restaurant
+      <% end %>
+    </div>
+  <hr>
+  <ul class="list-group list-unstyled">
+    <% @restaurants.each do |restaurant| %>
+      <li class= "mb-3">
+        <div class="card-restaurant">
+          <img src="<%= image_path('food.jpg') %>" />
+          <div class="card-restaurant-infos">
+            <h2><%= restaurant.name %></h2>
+            <p><%= restaurant.category %></p>
+            <p><%= restaurant.address %></p>
+            <p><%= restaurant.phone_number %></p>
+            <p><%= link_to "See details", restaurant_path(restaurant) %></p>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 </div>
