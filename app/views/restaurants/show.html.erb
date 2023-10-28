@@ -11,6 +11,13 @@
 
 <h2>reviews</h2>
 
+<%= simple_form_for [@restaurant, @review] do |f| %>
+  <%= f.input :content %>
+  <%= f.submit %>
+<% end %>
+
+<hr>
+
 <div>
   <ul class="list-group">
     <% @restaurant.reviews.each do |review| %>
