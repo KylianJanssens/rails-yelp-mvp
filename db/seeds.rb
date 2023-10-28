@@ -10,7 +10,7 @@ Restaurant.destroy_all
 
 puts "Creating restaurant"
 
-100.times do
+25.times do
   restaurant = Restaurant.create(
     name: Faker::Restaurant.name,
     address: Faker::Address.street_address,

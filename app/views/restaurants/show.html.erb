@@ -3,3 +3,21 @@
 <p>Located in: <%= @restaurant.address %></p>
 <p>Speciality: <%= @restaurant.category %></p>
 <p>Contact: <%= @restaurant.phone_number %> </p>
+
+<%= link_to "Back to all restaurants", restaurants_path %>
+<%= link_to "Write a review", new_restaurant_review_path(@restaurant) %>
+
+<hr>
+
+<h2>reviews</h2>
+
+<div>
+  <ul class="list-group">
+    <% @restaurant.reviews.each do |review| %>
+      <li class="list-group-item">
+        <%= review.content %>
+        <%= link_to "delete", review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+      </li>
+    <% end %>
+  </ul>
+</div>
