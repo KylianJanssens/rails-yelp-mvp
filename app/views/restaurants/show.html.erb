@@ -1,9 +1,10 @@
-<div>
+
   <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
     <h1>Restaurant <%= @restaurant.name %></h1>
   </div>
 
-  <div>
+  <div class="mt-2">
+    <h2>Average Rating: <%= number_with_precision(@average_rating, precision: 1) %> / 5</h2>
     <p>Located in: <%= @restaurant.address %></p>
     <p>Speciality: <%= @restaurant.category %></p>
     <p>Contact: <%= @restaurant.phone_number %> </p>
@@ -12,24 +13,35 @@
   <hr>
 
   <h2>Write a review ✍️</h2>
-
+  <%# add rating input %>
   <%= simple_form_for [@restaurant, @review] do |f| %>
     <%= f.input :content, class: "form-control" %>
+    <%= f.input :rating, collection: [1, 2, 3, 4, 5], include_blank: "Select a score" %>
     <%= f.submit "+ Add review", class:"btn btn-secondary" %>
   <% end %>
 
   <hr>
 
+  <%# display average rating %>
   <h2>Reviews</h2>
+
 
   <div class="mt-2">
     <ul class="list-group">
       <% @restaurant.reviews.each do |review| %>
         <li class="list-group-item mb-3">
-          <%= review.content %>
-          <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-            <i class="fa-solid fa-trash" style="color: #898d94;"></i>
-          <% end  %>
+
+          <div class="d-flex justify-content-between">
+            <h2>Rating: <%= review.rating %> / 5 </h2>
+            <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+              <i class="fa-solid fa-trash" style="color: #898d94;"></i>
+            <% end  %>
+          </div>
+
+          <div>
+            <%= review.content %>
+          </div>
+
         </li>
       <% end %>
     </ul>
@@ -50,4 +62,4 @@
 
 
   </div>
-</div>
+
